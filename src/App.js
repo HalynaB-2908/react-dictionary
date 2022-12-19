@@ -8,7 +8,7 @@ function App() {
        
       </header>
       <main>
-        <Dictionary defaultKeyword="rose"/>
+        <Dictionary defaultKeyword="bag"/>
       </main>
       <footer className="App-footer">Coded by me</footer>
       </div>

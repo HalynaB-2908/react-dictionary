@@ -9,23 +9,22 @@ export default function Dictionary(props) {
   let [results, setResults] = useState(null);
   let [loaded, setLoaded] = useState(false);
   let [photos, setPhotos] = useState(null);
+  let accessKey = "8o7gyaGj0Hdd8o7w6bWm-WZv35v8C8VJK3x7XrwbI5g";
 
   function handleDictionaryResponse(response) {
     setResults(response.data[0]);
   }
 
-  function handlePexelsResponse(response) {
-    setPhotos(response.data.photos);
+  function handleUnsplashResponse(response) {
+    setPhotos(response.data.results);
   }
 
   function search() {
     let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
     axios.get(apiUrl).then(handleDictionaryResponse);
-    const pexelsApiKey =
-      "563492ad6f917000010000014de058717bb34865a837a26800bb4078";
-    let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}&per_page=9`;
-    let headers = { Autorization: `Bearer ${pexelsApiKey}` };
-    axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
+   
+    let unsplashApiUrl = `https://api.unsplash.com/search/photos?page=1&query=${keyword}&orientation=landscape&per_page=30&client_id=${accessKey}`;
+    axios.get(unsplashApiUrl).then(handleUnsplashResponse);
   }
 
   function handleSubmit(event) {
